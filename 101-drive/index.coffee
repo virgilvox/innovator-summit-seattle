@@ -25,9 +25,27 @@ board.on 'ready', =>
       dir: 13
     invertPWM: true)
 
-  meshblu.on 'message', =>
-    return if !message.data?
-    { command, motor } = message.data
+  forward = (speed) =>
+    left.forward(speend)
+    right.forward(speed)
 
-    left[command] if motor == 'left'
-    right[command] if motor == 'right'
+  backward = (speed) =>
+    left.reverse(speed)
+    right.reverse(speed)
+
+  left = (speed) =>
+    left.reverse(speed)
+    right.forward(speed)
+
+  right = (speed) =>
+    left.forward(speed)
+    right.reverse(speed)
+
+  meshblu.on 'message', =>
+    return if !message.payload?
+    { command, speed } = message.payload
+
+    forward(speed) if command == 'forward'
+    backward(speed) if command == 'backward'
+    left(speed) if command == 'left'
+    right(speed) if command == 'right'

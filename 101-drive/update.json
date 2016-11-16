@@ -1,0 +1,22 @@
+{
+  "$set": {
+    "messageSchema": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right",
+            "forwards",
+            "backwards",
+            "stop"
+          ]
+        },
+        "speed": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
