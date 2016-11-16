@@ -8,8 +8,8 @@
           "enum": [
             "left",
             "right",
-            "forwards",
-            "backwards",
+            "forward",
+            "backward",
             "stop"
           ]
         },
