@@ -25,6 +25,11 @@ board.on 'ready', =>
       dir: 13
     invertPWM: true)
 
+  servo = new (five.Servo)(
+    pin: 6
+    startAt: 90
+  )
+
   forward = (speed) =>
     left.forward(speend)
     right.forward(speed)
@@ -54,3 +59,5 @@ board.on 'ready', =>
     left(speed) if command == 'left'
     right(speed) if command == 'right'
     stop() if command == 'stop'
+
+    servo(speed) if command == "servo"

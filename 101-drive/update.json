@@ -10,7 +10,8 @@
             "right",
             "forward",
             "backward",
-            "stop"
+            "stop",
+            "servo"
           ]
         },
         "speed": {
