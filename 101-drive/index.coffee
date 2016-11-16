@@ -41,6 +41,10 @@ board.on 'ready', =>
     left.forward(speed)
     right.reverse(speed)
 
+  stop = () =>
+    left.stop()
+    right.stop()
+
   meshblu.on 'message', =>
     return if !message.payload?
     { command, speed } = message.payload
@@ -49,3 +53,4 @@ board.on 'ready', =>
     backward(speed) if command == 'backward'
     left(speed) if command == 'left'
     right(speed) if command == 'right'
+    stop() if command == 'stop'
