@@ -41,12 +41,12 @@ board.on 'ready', =>
     right.reverse(speed)
 
   leftDir = (speed) =>
-    # left.reverse(speed)
+    left.stop()
     right.forward(speed)
 
   rightDir = (speed) =>
     left.reverse(speed)
-    # right.reverse(speed)
+    right.stop()
 
   stop = () =>
     left.stop()
