@@ -2,7 +2,7 @@ MeshbluSocketIO = require 'meshblu'
 config = require './meshblu.json'
 meshblu = new MeshbluSocketIO config
 SerialPort = require 'serialport'
-port = new SerialPort '/dev/tty.'
+port = new SerialPort '/dev/ttyACM0'
 
 
 meshblu.connect()
