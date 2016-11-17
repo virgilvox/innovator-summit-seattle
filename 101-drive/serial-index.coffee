@@ -1,52 +1,47 @@
 MeshbluSocketIO = require 'meshblu'
 config = require './meshblu.json'
 meshblu = new MeshbluSocketIO config
-five = require 'johnny-five'
-board = new five.Board()
-
+SerialPort = require 'serialport'
+port = new SerialPort '/dev/tty.'
 
 
 meshblu.connect()
 meshblu.on 'ready', =>
   console.log 'Connected'
 
-board.on 'ready', =>
-  left = new (five.Motor)(
-    pins:
-      pwm: 3
-      dir: 12
-    )
+port.on 'open', =>
 
-  right = new (five.Motor)(
-    pins:
-      pwm: 5
-      dir: 13
-    )
-
-  servo = new (five.Servo)(
-    pin: 6
-    startAt: 90
-  )
+  returnLine = '\r\n'
 
   forward = (speed) =>
-    left.reverse(speed)
-    right.forward(speed)
+    data = 'f ' + speed + returnLine
+    write(data)
 
   backward = (speed) =>
-    left.forward(speed)
-    right.reverse(speed)
+    data = 'b ' + speed + returnLine
+    write(data)
 
   leftDir = (speed) =>
-    left.stop()
-    right.forward(speed)
+    data = 'l ' + speed + returnLine
+    write(data)
 
   rightDir = (speed) =>
-    left.reverse(speed)
-    right.stop()
+    data = 'r ' + speed + returnLine
+    write(data)
 
   stop = () =>
-    left.stop()
-    right.stop()
+    data = 's' + returnLine
+    write(data)
+
+  servo = (angle) =>
+    data = 's ' + angle + returnLine
+    write(data)
+    
+  write = (data) =>
+    port.write data, (err) =>
+      if err
+        return console.log('Error on write: ', err.message)
+      console.log 'message written', data
 
   meshblu.on 'message', (message) =>
     return if !message.payload?
@@ -58,4 +53,4 @@ board.on 'ready', =>
     rightDir(speed) if command == 'right'
     stop() if command == 'stop'
 
-    servo.to(speed, 1000) if command == "servo"
+    servo speed if command == "servo"

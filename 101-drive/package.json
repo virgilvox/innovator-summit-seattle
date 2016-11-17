@@ -13,6 +13,7 @@
     "coffee-script": "^1.11.1",
     "firmata": "^0.14.1",
     "johnny-five": "^0.10.5",
-    "meshblu": "^2.2.5"
+    "meshblu": "^2.2.5",
+    "serialport": "^4.0.6"
   }
 }
