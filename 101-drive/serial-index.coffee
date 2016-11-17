@@ -34,7 +34,7 @@ port.on 'open', =>
     write(data)
 
   servo = (angle) =>
-    data = 's ' + angle + returnLine
+    data = 'servo ' + angle + returnLine
     write(data)
 
   write = (data) =>
