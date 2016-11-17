@@ -62,4 +62,4 @@ board.on 'ready', =>
     rightDir(speed) if command == 'right'
     stop() if command == 'stop'
 
-    servo.to(speed) if command == "servo"
+    servo.to(speed, 1000) if command == "servo"
