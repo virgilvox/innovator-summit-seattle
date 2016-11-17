@@ -37,6 +37,10 @@ port.on 'open', =>
     data = 'servo ' + angle + returnLine
     write(data)
 
+  shoot = () =>
+    data = 't' + returnLine
+    write(data)
+
   write = (data) =>
     port.write data, (err) =>
       if err
@@ -52,5 +56,6 @@ port.on 'open', =>
     leftDir(speed) if command == 'left'
     rightDir(speed) if command == 'right'
     stop() if command == 'stop'
+    shoot() if command == 'shoot'
 
     servo speed if command == "servo"

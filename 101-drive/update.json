@@ -11,7 +11,8 @@
             "forward",
             "backward",
             "stop",
-            "servo"
+            "servo",
+            "shoot"
           ]
         },
         "speed": {
